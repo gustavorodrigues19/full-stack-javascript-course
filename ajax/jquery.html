@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="js/jquery.js"></script>
+    <title>JQuery</title>
+</head>
+
+<body>
+    <h1>JQuery</h1>
+    <div id="get"></div>
+    <div id="post"></div>
+    <script>
+        function showResults(id, data) {
+            const text = JSON.stringify(data)
+            console.log(data)
+            document.getElementById(id).innerHTML = text
+        }
+
+        $.ajax({
+            url: 'parOuImpar',
+            data: {
+                numero: 5
+            },
+            success(data) {
+                showResults('get', data)
+            }
+        })
+
+        $.ajax({
+            url: 'formulario',
+            method: 'post',
+            data: {
+                name: 'Gustavo',
+                idade: '25',
+            },
+            success(data) {
+                showResults('post', data)
+            },
+            error(e) {
+                showResults('post', e)
+            }
+        })
+    </script>
+</body>
+
+</html>
