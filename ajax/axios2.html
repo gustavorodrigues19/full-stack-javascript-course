@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="js/axios.js"></script>
+    <title>Axios 2</title>
+</head>
+
+<body>
+    <h1>Axios Get/Post</h1>
+    <div id="get"></div>
+    <script>
+        function showResults(id, data) {
+            const text = JSON.stringify(data)
+            document.getElementById(id).innerHTML = text
+        }
+        // axios.get('parOuImpar', {
+        //     params: {
+        //         numero: 5
+        //     }
+        // }).then(resp => showResults('get', resp.data))
+        axios('parOuImpar?numero=4').then(resp => showResults('get', resp.data))
+    </script>
+</body>
+
+</html>
