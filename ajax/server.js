@@ -27,5 +27,14 @@ app.post('/upload', (req, res) => {
         res.end('Upload successfully')
     })
 })
+
+app.post('/formulario', (req, res) => {
+    res.send({
+        ...req.body,
+        id: 1,
+    })
+})
+
+
 app.get('/test', (req, res) => res.send('ok'))
 app.listen(8080, ()=> console.log('Server is running...'))

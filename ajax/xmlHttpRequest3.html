@@ -34,7 +34,7 @@
             success(response) {
                 const states = response.getElementsByTagName('estado')
                 const items = Array.from(states).reduce(
-                    (html, state) => html + `<li>${state.attributes.nome.value}</li>`
+                    (html, state) => html + `<li>${state.attributes.nome.value}</li>`, ''
                 )
                 document.body.insertAdjacentHTML('beforeend', `<ul>${items}</ul>`)
             },
