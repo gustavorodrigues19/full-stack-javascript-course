@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1>Ajax 2</h1>
+    <input type="file" name="arquivo" />
+    <div class="progresso"></div>
+    <script>
+        function ajax(config) {
+            const xhr = new XMLHttpRequest()
+
+            if (xhr.upload) {
+                xhr.upload.onprogress = e => {
+                    const current = e.loaded
+                    const total = e.total
+                    const percentage = Math.floor(current / total * 100)
+                    config.progress({ current, total, percentage })
+                }
+            }
+            xhr.open(config.method, config.url, true)
+            xhr.send(config.formData)
+        }
+
+        document.querySelector('input[type=file]').onchange = e => {
+            const formData = new FormData()
+            const inputFile = e.target
+            formData.append(inputFile.name, inputFile.files[0])
+
+
+            ajax({
+                url: "upload",
+                method: "post",
+                formData: formData,
+                progress(data) {
+                    const progressDiv = document.querySelector('.progresso')
+                    progressDiv.innerHTML = JSON.stringify(data)
+                }
+            })
+        }
+    </script>
+</body>
+
+</html>
