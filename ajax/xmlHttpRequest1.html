@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1>Ajax</h1>
+    <script>
+        function ajax(config) {
+            const xhr = new XMLHttpRequest()
+            xhr.open(config.method, config.url, true)
+            console.log(config)
+            xhr.onload = e => {
+                if (xhr.status === 200) {
+                    config.success(xhr.response)
+                }
+                else if (xhr.status >= 400) {
+                    config.error({
+                        code: xhr.status,
+                        text: xhr.statusText,
+                    })
+                }
+            }
+            xhr.send()
+        }
+
+        function createTable(states) {
+            const rows = states.map(state => {
+                const tdId = document.createElement('td')
+                tdId.innerHTML = state.id
+
+                const tdName = document.createElement('td')
+                tdName.innerHTML = state.nome
+
+                const tdShortName = document.createElement('td')
+                tdShortName.innerHTML = state.sigla
+
+                const tr = document.createElement('tr')
+
+                tr.appendChild(tdId)
+                tr.appendChild(tdName)
+                tr.appendChild(tdShortName)
+
+                return tr
+            })
+
+
+            const table = document.createElement('table')
+            rows.forEach(row => table.appendChild(row))
+            document.body.appendChild(table)
+        }
+
+        ajax({
+            url: "dados/estados.json",
+            method: "get",
+            success(response) {
+                const states = JSON.parse(response)
+                createTable(states)
+            },
+            error(e) {
+                const msg = document.createTextNode(`${e.code}: ${e.text}`)
+                document.body.appendChild(msg)
+            }
+        })
+    </script>
+</body>
+
+</html>
