@@ -1,0 +1,21 @@
+{
+  "name": "chapter-webpack",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "webpack"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "node-sass": "^7.0.1",
+    "sass-loader": "7.0.1",
+    "mini-css-extract-plugin": "0.4.0",
+    "css-loader": "0.28.11",
+    "style-loader": "0.21.0",
+    "webpack": "4.8.1",
+    "webpack-cli": "2.1.3"
+  }
+}
